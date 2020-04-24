@@ -40,11 +40,11 @@ export default {
       const ENG_NUM_REGXP = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+){6,20}$/
       const MIN6_MAX20_REGXP = /^.{6,20}$/
       if (!NULL_REGXP.test(value)) {
-        callback(new Error('密码不得为空白'))
+        callback(new Error('Can not null.'))
       } else if (!ENG_NUM_REGXP.test(value)) {
-        callback(new Error('请输入6～20个字，且是英文及数字组合'))
+        callback(new Error('please enter 6~20 characters，must be english and digital combination'))
       } else if (!MIN6_MAX20_REGXP.test(value)) {
-        callback(new Error('密码长度在 6 ~ 20 个字符之内'))
+        callback(new Error('Password length is within 6 ~ 20 characters'))
       } else {
         callback()
       }
@@ -121,9 +121,14 @@ export default {
   // width: 320px;
   // height: 100%;
   line-height: 50px;
-  min-height: 250px;
+  min-height: 300px;
+  margin: 50px;
   justify-content: center;
-  margin: auto;
   // background: linear-gradient(to bottom, rgba(#042540, 0.4), rgba(#02152C, 0.4));
+}
+
+.el-input__inner:focus{
+  border-color: rgba(250, 239, 79, 0.596);
+  border-width: 2px;
 }
 </style>
