@@ -12,36 +12,21 @@
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  // font-family: Avenir, Helvetica, Arial, sans-serif;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   background-color: #1456d17c;
-  // background: url(assets/images/login.jpg) center center fixed no-repeat;
-  // background-size: cover;
-
   // width: 100vw;
   // height: 100vh;
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
+  width: fill-available;
+  height: fill-available;
   display: flex;
   justify-content: center;
   align-items: center;
-  // background: url(../assets/images/login.jpg) center center fixed no-repeat;
-  background-size: cover;
-}
-
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+  // background: url(./assets/images/login.jpg) center center fixed no-repeat;
+  // background-size: cover;
 }
 
 #app-inside{
@@ -53,6 +38,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(to bottom, rgba(#042540, 0.4), rgba(#02152C, 0.4));
+  background: linear-gradient(to bottom, rgba(rgba(2, 21, 44, 0.5), 0.4), rgba(rgba(2, 21, 44, 0.5), 0.4));
 }
+
+// #nav {
+//   padding: 30px;
+//   a {
+//     font-weight: bold;
+//     color: #2c3e50;
+
+//     &.router-link-exact-active {
+//       color: #42b983;
+//     }
+//   }
+// }
+
 </style>

@@ -4,6 +4,17 @@
   </div>
 </template>
 
+<script>
+export default {
+  data () {
+    return {
+    }
+  },
+  components: {
+  }
+}
+</script>
+
 <style lang="scss">
 .todoList {
   align-items: stretch;
@@ -14,11 +25,3 @@
   white-space: nowrap;
 }
 </style>
-
-<script>
-export default {
-  data () {},
-  components: {
-  }
-}
-</script>

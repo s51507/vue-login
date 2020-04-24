@@ -4,7 +4,7 @@
       <input type="text" v-model.lazy="user" placeholder="ian001" style="text-align:center"><br>
       <input type="text" v-model.lazy="pwd" placeholder="qqq111" style="text-align:center"><br>
       <button @click="login">Login</button><br>
-      <a target="_blank" :href="gameLink">{{ gameLink }}</a>
+      <!-- <a target="_blank" :href="gameLink">{{ gameLink }}</a> -->
   </div>
   </div>
 </template>
@@ -17,8 +17,7 @@ export default {
   data () {
     return {
       user: 'ian001',
-      pwd: 'qqq111',
-      gameLink: ' '
+      pwd: 'qqq111'
     }
   },
   computed: {
@@ -43,8 +42,8 @@ export default {
       // 大大們的寫法
       const res = await axios.post(LOGIN, data, config)
       if (res) {
-        this.gameLink = res.data.data.gameLink
-        alert('登入成功', this.gameLink)
+        console.log(res.data.data.gameLink)
+        alert('登入成功', res.data.data.gameLink)
       }
       this.$router.push('/todoList')
 
