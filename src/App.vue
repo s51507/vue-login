@@ -18,7 +18,7 @@ body, html {
 #app {
   text-align: center;
   color: #2c3e50;
-  background-color: #1516166b;
+  // background-color: #1516166b;
   width: fill-available;
   height: fill-available;
   // width: 100%;
@@ -26,6 +26,8 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: url(./assets/images/login.jpg) center center fixed no-repeat;
+  background-size: cover;
 }
 
 #app-inside{
@@ -42,7 +44,7 @@ body, html {
   justify-content: center;
   align-items: center;
   background: linear-gradient(to bottom, rgba(rgba(182, 245, 253, 0.5), 0.4), rgba(rgba(164, 201, 202, 0.5), 0.4));
-  border: 2px solid rgba(252, 239, 60, 0.781);
+  border: 2px solid rgba(28, 68, 80, 0.438);
   border-radius: 20px;
 }
 
