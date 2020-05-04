@@ -72,6 +72,11 @@
 
         </el-form-item>
         <img v-if="item.inputType === 'img'" class="qrcodeImg" :src="item.src" :key="item.idx" />
+        <div v-if="item.inputType === 'showText'" class="text-data" :key="item.idx">
+          <div>
+            {{ item.text }}
+          </div>
+        </div>
         <div v-if="item.inputType === 'text'" class="text-data" :key="item.idx">
           <div>
             {{ item.text }}
@@ -112,7 +117,7 @@ export default {
     dialogTitle: String,
     titleCode: {
       type: [Number, String],
-      required: true
+      required: false
     },
     columnID: [Number, String],
     modifyData: [Object, Array],

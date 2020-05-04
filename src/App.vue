@@ -31,7 +31,7 @@ body, html {
 }
 
 #app-inside{
-  width: 320px;
+  width: 20%;
   height: 27%;
   min-height: 250px;
   // position: absolute;
@@ -39,6 +39,7 @@ body, html {
   // left: 50%;
   // transform: translate(-50%, -50%);
   margin: auto;
+  padding: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,6 +47,11 @@ body, html {
   background: linear-gradient(to bottom, rgba(rgba(182, 245, 253, 0.5), 0.4), rgba(rgba(164, 201, 202, 0.5), 0.4));
   border: 2px solid rgba(28, 68, 80, 0.438);
   border-radius: 20px;
+
+  // & input, button {
+  //   -webkit-box-shadow: 0 0 0 90px rgba(146, 193, 199, 0.363) inset;
+  //   -webkit-text-fill-color: rgb(0, 0, 0) !important;
+  // }
 }
 
 </style>
