@@ -46,12 +46,20 @@
       @submit="dialogSubmit"
       @handleDialogClosed="closeDialog"
     />
+
+    <msg-module
+      ref="MsgModule"
+      :msgTitle="tabShow"
+      :msgText="tabShow"
+    />
+
   </div>
 </template>
 
 <script>
 import TodoRender from '@/components/widgets/todoList/todo-render.js'
 import DialogModule from '@/components/widgets/dialog'
+import MsgModule from '@/components/widgets/messagebox'
 
 export default {
   data () {
@@ -73,7 +81,8 @@ export default {
   },
   components: {
     TodoRender,
-    DialogModule
+    DialogModule,
+    MsgModule
   },
   methods: {
     addTodo () {
@@ -127,6 +136,7 @@ export default {
       }
       // alert(`${item.text} 狀態已變更為 ${item.status}`)
       this.dialogItem = [{ inputType: 'showText', text: `${item.text} 的狀態已變更為 ${item.status}` }]
+      this.$refs.MsgModule.open()
       // this.dialogShow = true
     },
     closeDialog () {
