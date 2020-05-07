@@ -31,7 +31,7 @@ body, html {
 }
 
 #app-inside{
-  width: 20%;
+  width: 25%;
   height: 27%;
   min-height: 250px;
   // position: absolute;

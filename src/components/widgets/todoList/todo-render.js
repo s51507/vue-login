@@ -7,9 +7,10 @@ export default {
         return (
           <div key={ item.id }>
             <el-checkbox
-              // indeterminate = { item.indeterminate }
-              checked={ item.completed }
+              indeterminate = { item.indeterminate }
+              v-model={ item.completed }
               onChange={() => {
+                item.completed = !item.completed
                 this.$emit('doneTodo', item)
               }}
             >
