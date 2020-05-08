@@ -4,22 +4,14 @@
 <script>
 export default {
   props: {
-    value: {
+    msg: {
       type: [Object, Array]
-    },
-    msgTitle: String,
-    msgText: String
+    }
   },
   methods: {
     open () {
-      this.$alert(this.msgText, this.msgTitle, {
-        confirmButtonText: '確定',
-        callback: action => {
-        //   this.$message({
-        //     type: 'info',
-        //     message: `action: ${action}`
-        //   })
-        }
+      this.$alert(this.msg.text, this.msg.title, {
+        confirmButtonText: '確定'
       })
     }
   }

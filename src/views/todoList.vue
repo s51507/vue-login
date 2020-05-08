@@ -49,8 +49,7 @@
 
     <msg-module
       ref="MsgModule"
-      :msgTitle="tabShow"
-      :msgText="tabShow"
+      :msg="msg"
     />
 
   </div>
@@ -71,11 +70,17 @@ export default {
       dialogShow: false,
       dialogForm: [],
       dialogItem: [],
+      msgTitle: '',
+      msgText: '',
       count: {
         all: 0,
         waiting: 0,
         processing: 0,
         completed: 0
+      },
+      msg: {
+        title: '',
+        text: ''
       }
     }
   },
@@ -136,6 +141,7 @@ export default {
       }
       // alert(`${item.text} 狀態已變更為 ${item.status}`)
       this.dialogItem = [{ inputType: 'showText', text: `${item.text} 的狀態已變更為 ${item.status}` }]
+      this.msg.text = `${item.text} 的狀態已變更為 ${item.status}`
       this.$refs.MsgModule.open()
       // this.dialogShow = true
     },
