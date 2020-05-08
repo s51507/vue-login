@@ -37,18 +37,8 @@
       <!-- <todo-render :items="todos" @delTodo="delTodo" @doneTodo="doneTodo"/> -->
     </el-tabs>
 
-    <dialog-module
-      v-model="dialogForm"
-      width="500px"
-      :rules="'userList'"
-      :dialogItem="dialogItem"
-      :dialogShow.sync="dialogShow"
-      @submit="dialogSubmit"
-      @handleDialogClosed="closeDialog"
-    />
-
     <msg-module
-      ref="MsgModule"
+      ref="msgbox"
       :msg="msg"
     />
 
@@ -57,7 +47,6 @@
 
 <script>
 import TodoRender from '@/components/widgets/todoList/todo-render.js'
-import DialogModule from '@/components/widgets/dialog'
 import MsgModule from '@/components/widgets/messagebox'
 
 export default {
@@ -67,9 +56,6 @@ export default {
       originTodos: [],
       newTodo: '',
       tabShow: 'all',
-      dialogShow: false,
-      dialogForm: [],
-      dialogItem: [],
       msgTitle: '',
       msgText: '',
       count: {
@@ -86,14 +72,12 @@ export default {
   },
   components: {
     TodoRender,
-    DialogModule,
     MsgModule
   },
   methods: {
     addTodo () {
       if (!this.newTodo) {
-        this.dialogItem = [{ inputType: 'showText', text: '空的點屁點' }]
-        this.dialogShow = true
+        this.openMsgBox('空的點屁點')
         return
       }
       const timeStamp = Math.floor(Date.now())
@@ -139,17 +123,11 @@ export default {
         this.count.waiting--
         this.count.processing++
       }
-      // alert(`${item.text} 狀態已變更為 ${item.status}`)
-      this.dialogItem = [{ inputType: 'showText', text: `${item.text} 的狀態已變更為 ${item.status}` }]
-      this.msg.text = `${item.text} 的狀態已變更為 ${item.status}`
-      this.$refs.MsgModule.open()
-      // this.dialogShow = true
+      this.openMsgBox(`${item.text} 的狀態已變更為 ${item.status}`)
     },
-    closeDialog () {
-      this.dialogShow = false
-    },
-    dialogSubmit () {
-      this.dialogShow = false
+    openMsgBox (message) {
+      this.msg.text = message
+      this.$refs.msgbox.open()
     },
     updateTodos () {
       this.originTodos = [...this.todos]
@@ -159,9 +137,19 @@ export default {
     },
     __init__ () {
       this.todos = [
-        { id: 1, text: 'FF14 齁勝', completed: false, indeterminate: false, status: '待處理' },
-        { id: 2, text: '魂武做出來惹Yeah~', completed: false, indeterminate: false, status: '待處理' },
-        { id: 3, text: '働きたくない _(┐「﹃ﾟ｡)_', completed: false, indeterminate: false, status: '待處理' }
+        { id: 1, text: 'FF14 齁勝', completed: true, indeterminate: false, status: '待處理' },
+        { id: 2, text: '魂武做出來惹Yeah~', completed: true, indeterminate: false, status: '待處理' },
+        { id: 3, text: '働きたくない _(┐「﹃ﾟ｡)_', completed: false, indeterminate: false, status: '待處理' },
+        { id: 4, text: 'RRRRR', completed: false, indeterminate: true, status: '待處理' },
+        { id: 5, text: 'RRRRR', completed: false, indeterminate: true, status: '待處理' },
+        { id: 6, text: 'RRRRRRRRRR', completed: false, indeterminate: true, status: '待處理' },
+        { id: 7, text: 'RRR', completed: false, indeterminate: true, status: '待處理' },
+        { id: 8, text: 'RRRRR', completed: false, indeterminate: true, status: '待處理' },
+        { id: 9, text: 'RRR', completed: false, indeterminate: false, status: '待處理' },
+        { id: 10, text: 'RRRRRRRRRR', completed: true, indeterminate: false, status: '待處理' },
+        { id: 11, text: 'RRRRR', completed: true, indeterminate: false, status: '待處理' },
+        { id: 12, text: 'RRRRRRRRRR', completed: false, indeterminate: true, status: '待處理' },
+        { id: 13, text: 'RRRRRR', completed: false, indeterminate: false, status: '待處理' }
       ]
       this.updateTodos()
       this.count = {
@@ -208,12 +196,15 @@ export default {
   min-height: 250px;
   display: flex;
   flex-wrap: wrap;
+  width: 492px;
+  padding: 0px 50px;
   // justify-content: space-between;
   // overflow: hidden;
   // overflow-x: auto;
   // align-items: stretch;
   & .el-tabs {
     width: 100%;
+    height: 50vh;
   }
   & .el-input {
     margin-bottom: 20px
@@ -232,6 +223,11 @@ export default {
   }
   & .tab-icon {
     margin: 7%;
+  }
+   .el-tabs__content {
+    height: 400px;
+    flex-grow: 1;
+    overflow-y: scroll;
   }
 }
 </style>
