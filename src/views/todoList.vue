@@ -1,40 +1,20 @@
 <template>
   <div class="todoList" v-cloak>
-    <el-input placeholder="请输入内容" v-model="newTodo">
+    <el-input placeholder="请输入内容" v-model="newTodo" @keyup.enter.native="addTodo">
       <template slot="prepend">待辦事項</template>
       <el-button slot="append" icon="el-icon-plus" @click="addTodo">新增</el-button>
     </el-input>
 
       <el-tabs type="border-card" v-model="tabShow">
-        <el-tab-pane name='all'>
-          <span slot="label">
-            <i class="el-icon-folder tab-icon"> 全部</i>
-            <el-badge type="primary" :value="count.all" v-if="count.all>0" size="mini"></el-badge>
-          </span>
-          <todo-render v-if="tabShow === 'all'" :items="showTodos" @delTodo="delTodo" @doneTodo="doneTodo"/>
-        </el-tab-pane>
-        <el-tab-pane name='waiting'>
-          <span slot="label">
-            <i class="el-icon-folder-opened tab-icon"> 待處理</i>
-            <el-badge type="info" :value="count.waiting" v-if="count.waiting>0" size="mini"></el-badge>
-          </span>
-          <todo-render v-if="tabShow === 'waiting'" :items="showTodos" @delTodo="delTodo" @doneTodo="doneTodo"/>
-        </el-tab-pane>
-        <el-tab-pane name='processing'>
-          <span slot="label">
-            <i class="el-icon-folder-remove tab-icon"> 進行中</i>
-            <el-badge type="warning" :value="count.processing" v-if="count.processing>0" size="mini"></el-badge>
-          </span>
-          <todo-render v-if="tabShow === 'processing'" :items="showTodos" @delTodo="delTodo" @doneTodo="doneTodo"/>
-        </el-tab-pane>
-        <el-tab-pane name='completed'>
-          <span slot="label">
-            <i class="el-icon-folder-checked tab-icon"> 已完成</i>
-            <el-badge type="success" :value="count.completed" v-if="count.completed>0" size="mini"></el-badge>
-          </span>
-          <todo-render v-if="tabShow === 'completed'" :items="showTodos" @delTodo="delTodo" @doneTodo="doneTodo"/>
-        </el-tab-pane >
-      <!-- <todo-render :items="todos" @delTodo="delTodo" @doneTodo="doneTodo"/> -->
+        <template  v-for="item in todoTabs">
+          <el-tab-pane :name="item.name" :key="item.name">
+            <span slot="label">
+              <i :class="item.icon + ' tab-icon'"> {{item.label}}</i>
+              <el-badge :type="item.badgeType" :value="item.value" v-show="item.value>0" size="mini"/>
+            </span>
+            <todo-render v-if="tabShow === item.name" :items="showTodos" @delTodo="delTodo" @doneTodo="doneTodo"/>
+          </el-tab-pane>
+        </template>
     </el-tabs>
 
     <msg-module
@@ -89,6 +69,7 @@ export default {
       })
       this.count.all++
       this.count.waiting++
+      this.openMsgBox(`已新增 ${this.newTodo} 至待處理`)
       this.newTodo = ''
     },
     delTodo (delItem) {
@@ -140,11 +121,11 @@ export default {
         { id: 1, text: 'FF14 齁勝', completed: true, indeterminate: false, status: '待處理' },
         { id: 2, text: '魂武做出來惹Yeah~', completed: true, indeterminate: false, status: '待處理' },
         { id: 3, text: '働きたくない _(┐「﹃ﾟ｡)_', completed: false, indeterminate: false, status: '待處理' },
-        { id: 4, text: 'RRRRR', completed: false, indeterminate: true, status: '待處理' },
-        { id: 5, text: 'RRRRR', completed: false, indeterminate: true, status: '待處理' },
-        { id: 6, text: 'RRRRRRRRRR', completed: false, indeterminate: true, status: '待處理' },
-        { id: 7, text: 'RRR', completed: false, indeterminate: true, status: '待處理' },
-        { id: 8, text: 'RRRRR', completed: false, indeterminate: true, status: '待處理' },
+        { id: 4, text: '新辦公室好遠喔', completed: false, indeterminate: true, status: '待處理' },
+        { id: 5, text: '好累喔', completed: false, indeterminate: true, status: '待處理' },
+        { id: 6, text: 'WHY~', completed: false, indeterminate: true, status: '待處理' },
+        { id: 7, text: '何で', completed: false, indeterminate: true, status: '待處理' },
+        { id: 8, text: '', completed: false, indeterminate: true, status: '待處理' },
         { id: 9, text: 'RRR', completed: false, indeterminate: false, status: '待處理' },
         { id: 10, text: 'RRRRRRRRRR', completed: true, indeterminate: false, status: '待處理' },
         { id: 11, text: 'RRRRR', completed: true, indeterminate: false, status: '待處理' },
@@ -183,6 +164,14 @@ export default {
         })
       }
       return this.todos
+    },
+    todoTabs () {
+      return [
+        { name: 'all', icon: 'el-icon-folder', label: '全部', badgeType: 'primary', value: this.count.all },
+        { name: 'waiting', icon: 'el-icon-folder-opened', label: '待處理', badgeType: 'info', value: this.count.waiting },
+        { name: 'processing', icon: 'el-icon-folder-remove', label: '進行中', badgeType: 'warning', value: this.count.processing },
+        { name: 'completed', icon: 'el-icon-folder-checked', label: '已完成', badgeType: 'success', value: this.count.completed }
+      ]
     }
   },
   mounted () {
@@ -229,5 +218,29 @@ export default {
     flex-grow: 1;
     overflow-y: scroll;
   }
+}
+
+// [v-cloak] {
+// display: none;
+// }
+
+::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0);
+  border-radius: 10px;
+  background-color: white;
+}
+
+::-webkit-scrollbar
+{
+  width: 12px;
+  background-color: white;
+}
+
+::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.089);
 }
 </style>
