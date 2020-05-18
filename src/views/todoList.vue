@@ -226,6 +226,7 @@ export default {
 
 ::-webkit-scrollbar-track
 {
+  box-shadow: inset 0 0 6px rgba(0,0,0,0);
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0);
   border-radius: 10px;
   background-color: white;
@@ -240,6 +241,8 @@ export default {
 ::-webkit-scrollbar-thumb
 {
   border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.089);
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: rgba(255, 255, 255, 0.089);
 }
