@@ -6,6 +6,8 @@
       <el-button @click="login">Login</el-button><br>
       <el-button @click="openDialog">openDialog</el-button>
       <!-- <a target="_blank" :href="gameLink">{{ gameLink }}</a> -->
+      <countdown />
+
     </div>
 
     <dialog-module
@@ -29,10 +31,12 @@
 import axios from 'axios'
 import { HOST, LOGIN } from '@/constant'
 import DialogModule from '@/components/widgets/dialog'
+import Countdown from '@/components/countdown-new'
 
 export default {
   components: {
-    DialogModule
+    DialogModule,
+    Countdown
   },
   data () {
     const validatePass = (rule, value, callback) => {
